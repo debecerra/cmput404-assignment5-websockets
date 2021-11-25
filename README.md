@@ -63,3 +63,8 @@ Contributors
 * Mark Galloway
 * Abram Hindle
 * Cole Mackenzie
+
+
+References
+============
+- Abram Hindle, cmput404-slides, https://github.com/uofa-cmput404/cmput404-slides/blob/master/examples/WebSocketsExamples/broadcaster.py, 2021-03-22, Apache 2.0
