@@ -45,26 +45,67 @@ debug("Test");
 world = {};
 
 //XXX: TODO Make this prettier!
+// function drawCircle(context,entity) {
+//     with(context) {
+//         beginPath();                
+//         lineWidth = 3;
+//         var x = entity["x"];
+//         var y = entity["y"];
+//         //moveTo(x,y);
+//         fillStyle = entity["colour"];
+//         strokeStyle = fillStyle;
+//         arc(x, y, (entity["radius"])?entity["radius"]:50, 0, 2.0 * Math.PI, false);  
+//         stroke();                                
+//     }
+// }
 function drawCircle(context,entity) {
-    with(context) {
-        beginPath();                
-        lineWidth = 3;
-        var x = entity["x"];
-        var y = entity["y"];
-        //moveTo(x,y);
-        fillStyle = entity["colour"];
-        strokeStyle = fillStyle;
-        arc(x, y, (entity["radius"])?entity["radius"]:50, 0, 2.0 * Math.PI, false);  
-        stroke();                                
-    }
+        // Not a circle any more!
+        let x = entity["x"];
+    let y = entity["y"];
+    let radius = entity["radius"] ? entity["radius"] : 50
+    let fillStyle = entity["colour"];
+
+    drawStarHelper(x,y,10,radius,Math.floor(radius*0.6), fillStyle);
 }
+
+// markE, https://stackoverflow.com/users/411591/marke, How to draw a star by using canvas HTML5?, 
+// 2014-09-15, https://stackoverflow.com/a/25840319, CC BY-SA 3.0
+function drawStarHelper(cx,cy,spikes,outerRadius,innerRadius, colour){
+    var rot=Math.PI/2*3;
+    var x=cx;
+    var y=cy;
+    var step=Math.PI/spikes;
+
+    context.beginPath();
+    context.moveTo(cx,cy-outerRadius)
+    for(i=0;i<spikes;i++){
+        x=cx+Math.cos(rot)*outerRadius;
+        y=cy+Math.sin(rot)*outerRadius;
+        context.lineTo(x,y)
+        rot+=step
+
+        x=cx+Math.cos(rot)*innerRadius;
+        y=cy+Math.sin(rot)*innerRadius;
+        context.lineTo(x,y)
+        rot+=step
+    }
+    context.lineTo(cx,cy-outerRadius);
+    context.closePath();
+    context.lineWidth=Math.floor(outerRadius * 0.25);
+    context.strokeStyle= colour ? colour : 'blue';
+    context.stroke();
+    context.fillStyle='#B0E0E6';
+    context.fill();
+}
+
+//XXX: TODO Make this prettier!
 
 function prepEntity(entity) {
     if (!entity["colour"]) {
         entity["colour"] = "#FF0000";
     }
     if (!entity["radius"]) {
-        entity["radius"] = 50;
+        entity["radius"] = 30;
     }
     return entity;
 }
@@ -72,7 +113,7 @@ function prepEntity(entity) {
 function clearFrame() {
     with(context) {
 	moveTo(0,0);
-	fillStyle = "#000";
+	fillStyle = "#011511";
 	fillRect(0,0,W,H);
     }
 
@@ -236,16 +277,17 @@ mouse = (function() {
 // Add the application specific mouse listeners!
 //XXX: TODO Make these prettier!
 mouse.mousedowners.push(function(x,y,clicked,e) {
-    addEntityWithoutName({'x':x,'y':y,'colour':'blue'});
+    addEntityWithoutName({'x':x,'y':y,'colour':'#0000CD',
+                          'radius':Math.floor(Math.random()*7.5)+5});
 });
 
 mouse.mouseuppers.push(function(x,y,clicked,e) {
-    addEntityWithoutName({'x':x,'y':y,'colour':'red'});
+    addEntityWithoutName({'x':x,'y':y,'colour':'#FF4500'});
 });
 
 mouse.mousedraggers.push(function(x,y,clicked,e) {
-    addEntityWithoutName({'x':x,'y':y,'colour':'green',
-                          'radius':10});
+    addEntityWithoutName({'x':x,'y':y,'colour':'#0000CD',
+                          'radius':Math.floor(Math.random()*7.5)+5});
 });
 
 

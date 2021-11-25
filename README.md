@@ -68,3 +68,4 @@ Contributors
 References
 ============
 - Abram Hindle, cmput404-slides, https://github.com/uofa-cmput404/cmput404-slides/blob/master/examples/WebSocketsExamples/broadcaster.py, 2021-03-22, Apache 2.0
+- markE, https://stackoverflow.com/users/411591/marke, How to draw a star by using canvas HTML5?, 2014-09-15, https://stackoverflow.com/a/25840319, CC BY-SA 3.0
