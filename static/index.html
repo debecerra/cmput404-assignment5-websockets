@@ -308,7 +308,11 @@ function wsSetup() {
     };
     socket.onmessage = function(msg) {  
         try {
-            debug("WebSocket Recv:" + msg.data);
+            if (msg.data.length > 80) {
+                debug("WebSocket Recv:" + msg.data.slice(0,80) + "...");
+            } else {
+                debug("WebSocket Recv:" + msg.data);
+            }
             //XXX: TODO What are you going to do here? 
             data = JSON.parse(msg.data)
             world = {

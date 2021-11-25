@@ -138,6 +138,10 @@ def subscribe_socket(ws):
     clients.append(client)
     g = gevent.spawn(read_ws, ws, client)
     try:
+        # send them the current world
+        data = myWorld.world()
+        msg = json.dumps(data)
+        ws.send(msg)
         while True:
             # block here
             # print("Getting from Queue")
