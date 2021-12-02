@@ -167,7 +167,8 @@ def flask_post_json():
     else:
         return json.loads(request.form.keys()[0])
 
-
+# Diego Becerra, Abram Hindle, "CMPUT 404 Assignment AJAX", 
+# https://github.com/debecerra/cmput404-assignment4-ajax/blob/master/server.py, Apache 2.0
 @app.route("/entity/<entity>", methods=['POST', 'PUT'])
 def update(entity):
     '''update the entities via this interface'''
